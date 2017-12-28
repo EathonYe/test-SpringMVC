@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 这一步是在声明Spring-context -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -12,7 +13,7 @@
     <!--启用spring的一些annotation -->
     <context:annotation-config/>
 
-    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+    <!-- 自动扫描base-package指定的包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
     <context:component-scan base-package="controller">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
@@ -26,6 +27,7 @@
     <!--<mvc:resources mapping="/images/**" location="/WEB-INF/statics/images/"/>-->
     <!--<mvc:resources mapping="/views/**/*.html" location="/WEB-INF/views/"/>-->
 
+    <!-- 这边指示需要单独处理的静态资源，这些资源都是可见的 -->
     <!--但是项目部署到linux下发现WEB-INF的静态资源会出现无法解析的情况，但是本地tomcat访问正常，因此建议还是直接把静态资源放在webapp的statics下，映射配置如下-->
     <mvc:resources mapping="/css/**" location="/static/css/"/>
     <mvc:resources mapping="/js/**" location="/static/js/"/>
