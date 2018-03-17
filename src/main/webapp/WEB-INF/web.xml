@@ -16,6 +16,7 @@
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <!--Sources标注的文件夹下需要新建一个spring文件夹，其实通过这种方式，该文件可以放到应用程序目录的任何地方-->
+      <!-- param-name是固定的，为contextConfigLocation -->
       <!-- 或者在WEB-INF目录下新建一个Dispatcher Servlet的名称+'-servlet.xml'的文件 -->
       <param-name>contextConfigLocation</param-name>
       <param-value>WEB-INF/spring-mvc.xml</param-value>
