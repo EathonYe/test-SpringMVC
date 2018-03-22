@@ -1,4 +1,4 @@
-package controller;
+package com.example.controller;
 
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;

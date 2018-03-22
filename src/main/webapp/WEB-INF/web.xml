@@ -19,15 +19,16 @@
       <!-- param-name是固定的，为contextConfigLocation -->
       <!-- 或者在WEB-INF目录下新建一个Dispatcher Servlet的名称+'-servlet.xml'的文件 -->
       <param-name>contextConfigLocation</param-name>
-      <param-value>WEB-INF/spring-mvc.xml</param-value>
+      <param-value>classpath:spring-*.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
     <async-supported>true</async-supported>
   </servlet>
 
-  <!--拦截所有请求-->
+  <!--写成/*，拦截所有请求-->
+  <!-- 这里写成/,会拦截路径型URL，不会匹配到*.html这样的后缀型URL -->
   <servlet-mapping>
     <servlet-name>dispatcherServlet</servlet-name>
-    <url-pattern>/</url-pattern>
+    <url-pattern>/*</url-pattern>
   </servlet-mapping>
 </web-app>
