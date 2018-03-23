@@ -18,25 +18,36 @@
     <!-- parameterType 指明查询时使用的参数类型，resultType 指明查询返回的结果集类型 -->
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.model.User">
         insert into user
-        (username,password,sex,address,phone,email,create_time)
+        (
+          username,
+          password,
+          sex,
+          phone,
+          email
+        <if test="createTime != null">
+          ,create_time
+        </if>
+        )
         values
         (
           #{username},
           #{password},
           #{sex},
           #{phone},
-          #{email},
-          #{createTime}
+          #{email}
+          <if test="createTime != null">
+              ,#{createTime}
+          </if>
         )
     </insert>
 
     <update id="updateUser"  parameterType="com.example.model.User">
         update user set
-        address=#{address} where
+        password=#{password} where
         id=#{id}
     </update>
 
-    <delete id="deleteUser" parameterType="int">
+    <delete id="deleteUser" parameterType="com.example.model.User">
         delete from user where
         id=#{id}
     </delete>
