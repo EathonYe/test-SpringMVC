@@ -9,7 +9,7 @@
         <result property="sex" column="sex" jdbcType="INTEGER"></result>
         <result property="phone" column="phone" jdbcType="VARCHAR"></result>
         <result property="email" column="email" jdbcType="VARCHAR"></result>
-        <result property="create_time" column="createTime" jdbcType="TIMESTAMP"></result>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"></result>
     </resultMap>
 
     <!-- 定义 SQL 语句，其中 id 需要和接口中的方法名一致 -->
@@ -60,16 +60,28 @@
     </select>
 
     <select id="getUsers" parameterType="com.example.model.User" resultMap="userMap">
-        select * from user
+        select user.id,user.username,user.sex,user.phone,user.email,user.create_time from user
         <where>
             <if test="id != null">
                 id = #{id}
             </if>
             <if test="username != null">
-              AND username = #{username}
+                AND username = #{username}
             </if>
             <if test="password != null">
-              AND password = #{password}
+                AND password = #{password}
+            </if>
+            <if test="sex != null">
+                AND sex = #{sex}
+            </if>
+            <if test="phone != null">
+                AND phone = #{phone}
+            </if>
+            <if test="email != null">
+                AND email = #{email}
+            </if>
+            <if test="createTime != null">
+                AND cerate_time = #{createTime}
             </if>
         </where>
     </select>

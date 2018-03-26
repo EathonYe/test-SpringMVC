@@ -2,11 +2,14 @@ package com.example.controller;
 
 import com.example.model.User;
 import com.example.service.UserService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -80,6 +83,23 @@ public class UserController {
             result.put("message", "用户更新失败!");
         } finally {
 
+        }
+
+        return result;
+    }
+
+    @RequestMapping("/list")
+    @ResponseBody
+    public JSONObject list(User user) {
+        JSONObject result = new JSONObject();
+
+        try {
+            List<User> userList = userService.getUsers(user);
+            result.put("successful", true);
+            result.put("data", userList);
+        } catch (Exception e) {
+            result.put("successful", false);
+            result.put("msg", "用户列表获取失败！");
         }
 
         return result;
