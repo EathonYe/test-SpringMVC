@@ -62,8 +62,8 @@ public class UserServiceImpl implements UserService {
      * @return
      * @throws Exception
      */
-    public List<User> getUsers() throws Exception {
-        return userMapper.getUsers();
+    public List<User> getUsers(User user) throws Exception {
+        return userMapper.getUsers(user);
     }
 }
 

@@ -3,13 +3,13 @@
 <mapper namespace="com.example.mapper.UserMapper">
     <!-- 自定义返回结果集 -->
     <resultMap id="userMap" type="com.example.model.User">
-        <id property="id" column="id" javaType="int"></id>
-        <result property="username" column="username" javaType="String"></result>
-        <result property="password" column="password" javaType="String"></result>
-        <result property="sex" column="sex" javaType="String"></result>
-        <result property="phone" column="phone" javaType="String"></result>
-        <result property="email" column="email" javaType="String"></result>
-        <result property="create_time" column="createTime" javaType="Date"></result>
+        <id property="id" column="id" jdbcType="INTEGER"></id>
+        <result property="username" column="username" jdbcType="VARCHAR"></result>
+        <result property="password" column="password" jdbcType="VARCHAR"></result>
+        <result property="sex" column="sex" jdbcType="INTEGER"></result>
+        <result property="phone" column="phone" jdbcType="VARCHAR"></result>
+        <result property="email" column="email" jdbcType="VARCHAR"></result>
+        <result property="create_time" column="createTime" jdbcType="TIMESTAMP"></result>
     </resultMap>
 
     <!-- 定义 SQL 语句，其中 id 需要和接口中的方法名一致 -->
@@ -52,15 +52,26 @@
         id=#{id}
     </delete>
 
-    <!-- 如未为 Java Bean 起类别名，resultType="com.shiyanlou.mybatis.model.User" -->
+    <!-- 如未为 Java Bean 起类别名，resultType="com.example.model.User" -->
 
     <!-- 使用resultType时，一定要保证，你属性名与字段名相同；如果不相同，就使用resultMap -->
     <select id="getUser" parameterType="Integer" resultType="com.example.model.User">
         select * from user where id=#{id}
     </select>
 
-    <select id="getUsers" resultMap="userMap">
+    <select id="getUsers" parameterType="com.example.model.User" resultMap="userMap">
         select * from user
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="username != null">
+              AND username = #{username}
+            </if>
+            <if test="password != null">
+              AND password = #{password}
+            </if>
+        </where>
     </select>
 
 </mapper>

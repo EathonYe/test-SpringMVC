@@ -14,7 +14,7 @@ public interface UserMapper {
      */
     public User getUser(Integer id) throws Exception;
 
-    /*
+    /**
      * 新增用戶
      * @param user
      * @return
@@ -22,7 +22,7 @@ public interface UserMapper {
      */
     public int insertUser(User user) throws Exception;
 
-    /*
+    /**
      * 修改用戶
      * @param user
      * @param id
@@ -31,7 +31,7 @@ public interface UserMapper {
      */
     public int updateUser(User user) throws Exception;
 
-    /*
+    /**
      * 刪除用戶
      * @param id
      * @return
@@ -39,10 +39,10 @@ public interface UserMapper {
      */
     public int deleteUser(Integer id) throws Exception;
 
-    /*
+    /**
      * 查询所有的用户信息
      * @return
      * @throws Exception
      */
-    public List<User> getUsers() throws Exception;
+    public List<User> getUsers(User user) throws Exception;
 }
