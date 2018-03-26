@@ -44,6 +44,6 @@ public interface UserService {
      * @return
      * @throws Exception
      */
-    public List<User> getUsers() throws Exception;
+    public List<User> getUsers(User user) throws Exception;
 }
 
