@@ -49,16 +49,16 @@ public class LoginController {
             if (userList != null && !userList.isEmpty() &&
                     user.getPassword().equals(password)) {
                 result.put("successful", true);
-                result.put("message", "登录成功！");
+                result.put("msg", "登录成功！");
 
                 HttpSession session = request.getSession();
                 user.setPassword(null);
                 session.setAttribute("subject", user);
             } else {
-                result.put("message", "用户名或密码错误！");
+                result.put("msg", "用户名或密码错误！");
             }
         } catch (Exception e) {
-            result.put("message", "用户名或密码错误！");
+            result.put("msg", "用户名或密码错误！");
         }
 
         return result;

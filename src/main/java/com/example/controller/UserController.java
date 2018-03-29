@@ -42,10 +42,10 @@ public class UserController {
         try {
             userService.insertUser(user);
             result.put("successful", true);
-            result.put("message", "成功添加用户！");
+            result.put("msg", "成功添加用户！");
         } catch (Exception e) {
             result.put("successful", false);
-            result.put("message", "添加用户失败！");
+            result.put("msg", "添加用户失败！");
         } finally {
 
         }
@@ -54,15 +54,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
     public JSONObject deleteUser(User user) {
         JSONObject result = new JSONObject();
         try {
             userService.deleteUser(user.getId());
             result.put("successful", true);
-            result.put("message", "成功删除用户！");
+            result.put("msg", "成功删除用户！");
         } catch (Exception e) {
             result.put("successful", false);
-            result.put("message", "删除用户失败！");
+            result.put("msg", "删除用户失败！");
         } finally {
 
         }
@@ -71,16 +72,17 @@ public class UserController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @ResponseBody
     public JSONObject updateUser(User user) {
         JSONObject result = new JSONObject();
         try {
             userService.updateUser(user);
             result.put("successful", true);
-            result.put("message", "用户更新成功!");
+            result.put("msg", "用户更新成功!");
         } catch (Exception e) {
             e.printStackTrace();
             result.put("successful", false);
-            result.put("message", "用户更新失败!");
+            result.put("msg", "用户更新失败!");
         } finally {
 
         }
