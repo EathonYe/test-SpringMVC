@@ -18,6 +18,8 @@ public class User {
 
     private String email;
 
+    private Integer roleId;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 
@@ -75,5 +77,13 @@ public class User {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 }

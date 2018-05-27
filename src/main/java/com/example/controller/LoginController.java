@@ -3,14 +3,14 @@ package com.example.controller;
 import com.example.model.User;
 import com.example.service.UserService;
 import net.sf.json.JSONObject;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,12 +27,12 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("")
-    public ModelAndView getLoginView() {
-        ModelAndView modelAndView = new ModelAndView("login");
-
-        return modelAndView;
-    }
+//    @RequestMapping("")
+//    public ModelAndView getLoginView() {
+//        ModelAndView modelAndView = new ModelAndView("login");
+//
+//        return modelAndView;
+//    }
 
     @RequestMapping(value = "/do", method = RequestMethod.POST)
     @ResponseBody
@@ -64,6 +64,25 @@ public class LoginController {
         return result;
 
 //        return "login";
+    }
+
+    @PostMapping("/")
+    public @ResponseBody JSONObject shiroLogin(User user) {
+        JSONObject result = new JSONObject();
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword()) ;
+        try {
+            subject.login(token);
+            result.put("successful", true);
+            result.put("msg", "登录成功！");
+            return result;
+        }catch (Exception e){
+            //这里将异常打印关闭是因为如果登录失败的话会自动抛异常
+//            e.printStackTrace();
+            result.put("successful", true);
+            result.put("msg", "用户名或密码错误！");
+            return result;
+        }
     }
 }
 

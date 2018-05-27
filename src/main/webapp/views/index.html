@@ -5,6 +5,11 @@
     <title>index</title>
 </head>
 <body>
-index html.
+<shiro:hasRole name="admin">
+    这是admin角色登录：<shiro:principal></shiro:principal>
+</shiro:hasRole>
+<shiro:hasPermission name="user">
+    有user权限信息
+</shiro:hasPermission>
 </body>
 </html>

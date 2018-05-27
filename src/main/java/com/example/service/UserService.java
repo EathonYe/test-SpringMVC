@@ -3,6 +3,7 @@ package com.example.service;
 import com.example.model.User;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
 
@@ -12,7 +13,7 @@ public interface UserService {
      * @param  id 用户id
      * @return User
      */
-    public User getUser(Integer id) throws Exception;
+    User getUser(Integer id) throws Exception;
 
     /**
      * 新增用戶
@@ -20,7 +21,7 @@ public interface UserService {
      * @return
      * @throws Exception
      */
-    public int insertUser(User user) throws Exception;
+    int insertUser(User user) throws Exception;
 
     /**
      * 修改用戶
@@ -29,7 +30,7 @@ public interface UserService {
      * @return
      * @throws Exception
      */
-    public int updateUser(User user) throws Exception;
+    int updateUser(User user) throws Exception;
 
     /**
      * 刪除用戶
@@ -37,13 +38,27 @@ public interface UserService {
      * @return
      * @throws Exception
      */
-    public int deleteUser(Integer id) throws Exception;
+    int deleteUser(Integer id) throws Exception;
 
     /**
      * 查询所有的用户信息
      * @return
      * @throws Exception
      */
-    public List<User> getUsers(User user) throws Exception;
+    List<User> getUsers(User user);
+
+    /**
+     * 查询用户角色
+     * @param username
+     * @return
+     */
+    Set<String> findRoles(String username);
+
+    /**
+     * 查询用户权限
+     * @param username
+     * @return
+     */
+    Set<String> findPermissions(String username);
 }
 

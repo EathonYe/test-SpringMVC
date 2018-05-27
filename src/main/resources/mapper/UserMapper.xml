@@ -12,6 +12,16 @@
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"></result>
     </resultMap>
 
+    <resultMap id="BaseResultMap" type="com.example.model.User" >
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="roleId" column="role_id"/>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, username, password,role_id
+    </sql>
+
     <!-- 定义 SQL 语句，其中 id 需要和接口中的方法名一致 -->
     <!-- useGeneratedKeys：实现自动生成主键 -->
     <!-- keyProperty： 唯一标记一个属性 -->
@@ -101,6 +111,18 @@
                 AND cerate_time = #{createTime}
             </if>
         </where>
+    </select>
+
+    <select id="findUserByUsername" parameterType="String" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from user where username=#{username}
+    </select>
+    <select id="findRoles" parameterType="String" resultType="String">
+        select r.name from user u,role r where u.role_id=r.id and u.username=#{username}
+    </select>
+    <select id="findPermissions" parameterType="String" resultType="String">
+        select p.name from user u,role r,permission p
+        where u.role_id=r.id and p.role_id=r.id and u.username=#{username}
     </select>
 
 </mapper>

@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.model.User;
 import com.example.service.UserService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,5 +106,12 @@ public class UserController {
         }
 
         return result;
+    }
+
+    @RequestMapping("")
+    public ModelAndView testShiro() {
+//        List<User> users = userService.getUsers(new User());
+        ModelAndView mv = new ModelAndView("index");
+        return mv;
     }
 }
