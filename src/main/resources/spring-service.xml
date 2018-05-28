@@ -13,6 +13,11 @@
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="myRealm"/>
     </bean>
+    <!--logout filter-->
+    <!--配置一个登出过滤器，或者将登出URL“/logout”设置为anon-->
+    <bean id="logout" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+        <property name="redirectUrl" value="/views/login.html" />
+    </bean>
     <!-- Shiro过滤器 核心-->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <!-- Shiro的核心安全接口,这个属性是必须的 -->
@@ -26,10 +31,13 @@
             <value>
                 <!--anon 表示匿名访问，不需要认证以及授权-->
                 /login=anon
+                <!--/logout=anon-->
                 <!--authc表示需要认证 没有进行身份认证是不能进行访问的-->
                 /admin/*=authc
                 /user/*=authc,roles[admin]
                 /teacher=perms["user:create"]
+                <!--登出-->
+                /logout=logout
             </value>
         </property>
     </bean>
